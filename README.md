@@ -5,7 +5,7 @@
 
 This is a customized skin derived from http://andriusvelykis.github.io/reflow-maven-skin/
 
-Issues: https://wcm-io.atlassian.net/browse/WTOOL<br/>
+Issues: https://github.com/wcm-io/io.wcm.maven.skins.reflow-maven-skin/issues<br/>
 Wiki: https://wcm-io.atlassian.net/wiki/<br/>
 Continuous Integration: https://github.com/wcm-io/io.wcm.maven.skins.reflow-maven-skin/actions<br/>
 Commercial support: https://wcm.io/commercial-support.html
