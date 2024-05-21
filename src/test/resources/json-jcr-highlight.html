@@ -16,23 +16,42 @@
   "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
   "name": "./field",
   "fieldDescription": "Description for checkbox",
-  "text": "Check this"
+  "text": "Check this",
+  "arrayProp": ["value1", "value2"],
+  "booleanProp": true,
+  "numberProp": 123,
+  "numberArrayProp": [1,2,3],
+  "objectProp": {
+    "key1": "value1",
+    "key2": "value2"
+  },
+  "nullProp": null
 }</code></pre> 
         </div>      
 
         <h2>language: json-jcr</h2>
         <div class="source"> 
           <pre><code class="language-json-jcr">"field": {
-    "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
-    "name": "./field",
-    "fieldDescription": "Description for checkbox",
-    "text": "Check this"
-  }</code></pre> 
+  "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
+  "name": "./field",
+  "fieldDescription": "Description for checkbox",
+  "text": "Check this",
+  "arrayProp": ["value1", "value2"],
+  "booleanProp": true,
+  "numberProp": 123,
+  "numberArrayProp": [1,2,3],
+  "objectProp": {
+    "key1": "value1",
+    "key2": "value2"
+  },
+  "nullProp": null
+}</code></pre> 
           </div>      
   
       </div>
     <script src="../../main/resources/js/jquery.min.js"></script>
     <script src="../../main/resources/js/bootstrap.min.js"></script>
+    <script src="../../main/resources/js/reflow-json-jcr-convert.js"></script>
     <script src="../../main/resources/js/highlight.min.js"></script>
     <script src="../../main/resources/js/reflow-skin.js"></script>
   </body>
