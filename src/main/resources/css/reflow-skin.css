@@ -97,3 +97,13 @@ footer.well p,
 .subfooter {
   padding: 30px 0;
 }
+
+/* Reset pre styling from bootstrap - styling is applied by highlight.js */
+pre {
+  background-color: unset;
+  padding: unset;
+}
+/* Switch background color of hljs code snippets */
+div.source pre code.hljs {
+  background-color: #f8f8f8;
+}
