@@ -7,14 +7,14 @@ document.querySelectorAll('div.source pre code.language-json-jcr').forEach((code
   const jsonCode = code.innerText;
   const fileVaultXmlCode = jsonToFileVaultXml(jsonCode);
   if (!fileVaultXmlCode) {
-    // skip further processing if no FileVault XML code could be generated
+    // fallback to json highlighting if no FileVault XML code could be derived
+    code.classList.remove('language-json-jcr');
+    code.classList.add('language-json');
     return;
   }
 
-  // remove existing source DIV
   const source = code.parentElement.parentElement;
   const parent = source.parentElement;
-  source.remove();
 
   // instead, add a tab container with both FileVault XML and JSON views
   const tabContainer = document.createElement('div');
@@ -26,8 +26,7 @@ document.querySelectorAll('div.source pre code.language-json-jcr').forEach((code
   tabContainer.appendChild(tabSelection);
   tabContainer.appendChild(createCodeTab('xml', fileVaultXmlCode, true));
   tabContainer.appendChild(createCodeTab('json', jsonCode));
-
-  parent.appendChild(tabContainer);
+  parent.replaceChild(tabContainer, source);
 });
 
 function createTabSelection(language, title, active = false) {
@@ -72,12 +71,23 @@ function jsonToFileVaultXml(json) {
   if (inputJson.trim().startsWith('\"')) {
     inputJson = `{${inputJson}}`;
   }
-  const obj = JSON.parse(inputJson);
-  const childNames = getChildNames(obj);
-  if (childNames.length === 0) {
+  try {
+    const obj = JSON.parse(inputJson);
+    const childNames = getChildNames(obj);
+    if (isObjectArray(obj)) {
+      return objectArrayToXmlElement('element', obj, 0);
+    }
+    else if (childNames.length > 0) {
+      return objectToXmlElement(childNames[0], obj[childNames[0]], 0);
+    }
+    else {
+      return objectToXmlElement('element', obj, 0);
+    }
+  }
+  catch (err) {
+    console.error(`Failed to parse JSON: ${err}\n${json}`);
     return undefined;
   }
-  return objectToXmlElement(childNames[0], obj[childNames[0]], 0);
 }
 
 function objectToXmlElement(name, obj, level) {
@@ -96,11 +106,24 @@ function objectToXmlElement(name, obj, level) {
   else {
     xml += '>';
     childNames.forEach((childName) => {
-      xml += `\n${objectToXmlElement(childName, obj[childName], level+1)}`;
+      if (isObjectArray(obj[childName])) {
+        xml += `\n${objectArrayToXmlElement(childName, obj[childName], level+1)}`;
+      }
+      else {
+        xml += `\n${objectToXmlElement(childName, obj[childName], level+1)}`;
+      }
     });
     xml += `\n${indent(level)}</${name}>`;
   }
   return xml;
+}
+
+function objectArrayToXmlElement(name, objArray, level) {
+  const children = {};
+  getChildNames(objArray).forEach((childName) => {
+    children[`child${childName}`] = objArray[childName];
+  });
+  return objectToXmlElement(name, children, level);
 }
 
 function toValueString(value) {
@@ -146,7 +169,7 @@ function getAttributeNames(obj) {
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       const value = obj[key];
-      if (value != null && !(typeof value === 'object' && !Array.isArray(value))) {
+      if (value != null && !(isObject(value) || isObjectArray(value))) {
         result.push(key);
       }
     }
@@ -159,12 +182,23 @@ function getChildNames(obj) {
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       const value = obj[key];
-      if (value != null && typeof value === 'object' && !Array.isArray(value)) {
+      if (value != null && (isObject(value) || isObjectArray(value))) {
         result.push(key);
       }
     }
   }
   return result;
+}
+
+function isObject(value) {
+  return typeof value === 'object' && !Array.isArray(value)
+}
+
+function isObjectArray(value) {
+  if (Array.isArray(value)) {
+    return value.filter((item) => typeof item === 'object').length > 0;
+  }
+  return false;
 }
 
 function indent(level) {

@@ -130,6 +130,9 @@ div.source pre code.hljs {
 .source-tab .source {
   display:none;
 }
+.source-tab .source pre {
+  border-top-left-radius: 0;
+}
 .source-tab .source.active {
   display:block;
 }

@@ -10,9 +10,18 @@
     <div class="container-fluid">
       <h1>JSON JCR Highlight</h1>
 
-        <h2>Field</h2>
-        <div class="source"> 
-          <pre><code class="language-json-jcr">"field": {
+      <h2>json</h2>
+      <div class="source"> 
+        <pre><code class="language-json">"field": {
+  "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
+  "name": "./field",
+  "text": "Check this"
+}</code></pre> 
+      </div>
+
+      <h2>json-jcr Field</h2>
+      <div class="source"> 
+        <pre><code class="language-json-jcr">"field": {
   "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
   "name": "./field",
   "fieldDescription": "Description for checkbox",
@@ -28,13 +37,54 @@
     "nestedObjectProp": {
       "key1": "value1",
       "key2": "value2"
-    }  
+    }
   },
+  "objectArrayProp": [
+    {
+      "key1": "value1",
+      "key2": "value2"
+    },
+    {
+      "key1": "value1",
+      "key2": "value2"
+    }
+  ],
   "nullProp": null
 }</code></pre> 
-          </div>      
-  
       </div>
+
+      <h2>json-jcr Object</h2>
+      <div class="source"> 
+        <pre><code class="language-json-jcr">{
+  "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
+  "name": "./field",
+  "fieldDescription": "Description for checkbox"
+}</code></pre> 
+      </div>
+
+      <h2>json-jcr Array</h2>
+      <div class="source"> 
+        <pre><code class="language-json-jcr">[
+  {
+    "key1": "value1",
+    "key2": "value2"
+  },
+  {
+    "key1": "value1",
+    "key2": "value2"
+  }
+]</code></pre> 
+      </div>
+
+      <h2>json-jcr Invalid</h2>
+      <div class="source"> 
+        <pre><code class="language-json-jcr">{
+  "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
+  "name": "./field",
+  "fieldDescription": "Description for checkbox</code></pre> 
+      </div>
+
+  </div>
     <script src="../../main/resources/js/jquery.min.js"></script>
     <script src="../../main/resources/js/bootstrap.min.js"></script>
     <script src="../../main/resources/js/reflow-json-jcr-convert.js"></script>
