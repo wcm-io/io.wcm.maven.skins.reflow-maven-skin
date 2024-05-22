@@ -76,10 +76,11 @@ function jsonToFileVaultXml(json) {
     return undefined;
   }
   const childNames = getChildNames(obj);
+  const attributeNames = getAttributeNames(obj);
   if (isObjectArray(obj)) {
     return objectArrayToXmlElement('element', obj, 0);
   }
-  else if (childNames.length > 0) {
+  else if (childNames.length == 1 && attributeNames.length == 0) {
     return objectToXmlElement(childNames[0], obj[childNames[0]], 0);
   }
   else {
