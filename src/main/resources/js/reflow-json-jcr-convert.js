@@ -64,7 +64,7 @@ function objectToXmlElement(name, obj, level) {
     childNames.forEach((childName) => {
       xml += `\n${objectToXmlElement(childName, obj[childName], level+1)}`;
     });
-    xml += `\n</${name}>`;
+    xml += `\n${indent(level)}</${name}>`;
   }
   return xml;
 }
@@ -79,7 +79,7 @@ function toValueString(value) {
       }
     });
     if (valueTypeSet.size === 1) {
-      return `{${valueTypeSet.values().next().value}[]}[${value}]`;
+      return `{${valueTypeSet.values().next().value}}[${value}]`;
     }
     else {
       return `[${value}]`;

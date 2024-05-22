@@ -10,26 +10,7 @@
     <div class="container-fluid">
       <h1>JSON JCR Highlight</h1>
 
-      <h2>language: json</h2>
-      <div class="source"> 
-        <pre><code class="language-json">"field": {
-  "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
-  "name": "./field",
-  "fieldDescription": "Description for checkbox",
-  "text": "Check this",
-  "arrayProp": ["value1", "value2"],
-  "booleanProp": true,
-  "numberProp": 123,
-  "numberArrayProp": [1,2,3],
-  "objectProp": {
-    "key1": "value1",
-    "key2": "value2"
-  },
-  "nullProp": null
-}</code></pre> 
-        </div>      
-
-        <h2>language: json-jcr</h2>
+        <h2>Field</h2>
         <div class="source"> 
           <pre><code class="language-json-jcr">"field": {
   "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
@@ -41,8 +22,13 @@
   "numberProp": 123,
   "numberArrayProp": [1,2,3],
   "objectProp": {
+    "jcr:primaryType": "sling:Folder",
     "key1": "value1",
-    "key2": "value2"
+    "key2": "value2",
+    "nestedObjectProp": {
+      "key1": "value1",
+      "key2": "value2"
+    }  
   },
   "nullProp": null
 }</code></pre> 
