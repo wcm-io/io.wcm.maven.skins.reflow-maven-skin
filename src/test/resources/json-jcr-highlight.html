@@ -53,6 +53,44 @@
 }</code></pre> 
       </div>
 
+      <h2>json-jcr Field with Comments</h2>
+      <div class="source"> 
+        <pre><code class="language-json-jcr">"field": {
+  "sling:resourceType": "wcm-io/wcm/ui/granite/components/form/checkbox",
+  "name": "./field",
+  "fieldDescription": "Description for checkbox",
+  "text": "Check this",
+  /* This is an array */
+  "arrayProp": ["value1", "value2"],
+  // This is a boolean
+  "booleanProp": true,
+  "numberProp": 123,
+  "numberArrayProp": [1,2,3],
+  "objectProp": {
+    "jcr:primaryType": "sling:Folder",
+    "key1": "value1",
+    "key2": "value2",
+    "nestedObjectProp": {
+      "key1": "value1",
+      "key2": "value2"
+    }
+  },
+  "objectArrayProp": [
+    /* Item #1 */
+    {
+      "key1": "value1",
+      "key2": "value2"
+    },
+    /* Item #2 */
+    {
+      "key1": "value1",
+      "key2": "value2"
+    }
+  ],
+  "nullProp": null
+}</code></pre> 
+      </div>
+
       <h2>json-jcr Object</h2>
       <div class="source"> 
         <pre><code class="language-json-jcr">{
@@ -84,9 +122,10 @@
   "fieldDescription": "Description for checkbox</code></pre> 
       </div>
 
-  </div>
+    </div>
     <script src="../../main/resources/js/jquery.min.js"></script>
     <script src="../../main/resources/js/bootstrap.min.js"></script>
+    <script src="../../main/resources/js/json5.min.js"></script>
     <script src="../../main/resources/js/reflow-json-jcr-convert.js"></script>
     <script src="../../main/resources/js/highlight.min.js"></script>
     <script src="../../main/resources/js/reflow-skin.js"></script>

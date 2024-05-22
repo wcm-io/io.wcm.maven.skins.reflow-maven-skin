@@ -71,18 +71,28 @@ function jsonToFileVaultXml(json) {
   if (inputJson.trim().startsWith('\"')) {
     inputJson = `{${inputJson}}`;
   }
+  const obj = parseJson(inputJson);
+  if (!obj) {
+    return undefined;
+  }
+  const childNames = getChildNames(obj);
+  if (isObjectArray(obj)) {
+    return objectArrayToXmlElement('element', obj, 0);
+  }
+  else if (childNames.length > 0) {
+    return objectToXmlElement(childNames[0], obj[childNames[0]], 0);
+  }
+  else {
+    return objectToXmlElement('element', obj, 0);
+  }
+}
+
+function parseJson(json) {
   try {
-    const obj = JSON.parse(inputJson);
-    const childNames = getChildNames(obj);
-    if (isObjectArray(obj)) {
-      return objectArrayToXmlElement('element', obj, 0);
+    if (JSON5) {
+      return JSON5.parse(json);
     }
-    else if (childNames.length > 0) {
-      return objectToXmlElement(childNames[0], obj[childNames[0]], 0);
-    }
-    else {
-      return objectToXmlElement('element', obj, 0);
-    }
+    return JSON.parse(json);
   }
   catch (err) {
     console.error(`Failed to parse JSON: ${err}\n${json}`);
