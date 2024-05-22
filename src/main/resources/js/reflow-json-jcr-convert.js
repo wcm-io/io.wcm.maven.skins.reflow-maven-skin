@@ -5,25 +5,59 @@
  */
 document.querySelectorAll('div.source pre code.language-json-jcr').forEach((code) => {  
   const jsonCode = code.innerText;
+  const fileVaultXmlCode = jsonToFileVaultXml(jsonCode);
+  if (!fileVaultXmlCode) {
+    // skip further processing if no FileVault XML code could be generated
+    return;
+  }
+
+  // remove existing source DIV
   const source = code.parentElement.parentElement;
   const parent = source.parentElement;
   source.remove();
 
-  // replace source DIV with tab container showing multiple snippets
+  // instead, add a tab container with both FileVault XML and JSON views
   const tabContainer = document.createElement('div');
   tabContainer.classList.add('source-tab');
-  const fileVaultXmlCode = jsonToFileVaultXml(jsonCode);
-  if (fileVaultXmlCode) {
-    tabContainer.appendChild(createCodeTab('xml', fileVaultXmlCode));
-  }
+  const tabSelection = document.createElement('div');
+  tabSelection.classList.add('source-tab-selection');
+  tabSelection.appendChild(createTabSelection('xml', 'FileVault', true));
+  tabSelection.appendChild(createTabSelection('json', 'JSON'));
+  tabContainer.appendChild(tabSelection);
+  tabContainer.appendChild(createCodeTab('xml', fileVaultXmlCode, true));
   tabContainer.appendChild(createCodeTab('json', jsonCode));
 
   parent.appendChild(tabContainer);
 });
 
-function createCodeTab(language, codeText) {
+function createTabSelection(language, title, active = false) {
+  const tab = document.createElement('div');
+  tab.innerText = title;
+  tab.dataset.language = language;
+  if (active) {
+    tab.classList.add('active');
+  }
+  tab.addEventListener('click', () => {
+    const tabContainer = tab.parentElement.parentElement;
+    tabContainer.querySelectorAll('.source-tab-selection > div, .source').forEach((item) => {
+      if (item.dataset.language === language) {
+        item.classList.add('active');
+      }
+      else {
+        item.classList.remove('active');
+      }
+    });
+  });
+  return tab;
+}
+
+function createCodeTab(language, codeText, active = false) {
   const source = document.createElement('div');
   source.classList.add('source');
+  source.dataset.language = language;
+  if (active) {
+    source.classList.add('active');
+  }
   const pre = document.createElement('pre');
   const code = document.createElement('code');
   code.classList.add(`language-${language}`);
