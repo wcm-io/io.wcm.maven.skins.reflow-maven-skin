@@ -1691,7 +1691,9 @@
   <script src="$resourcePath/js/reflow-scroll.js"></script>
 #*  *##end#*
 
-    // use a hosted version of highlight.js for syntax highlighting  *###
+    // use highlight.js for syntax highlighting, with special support for json-jcr  *###
+  <script src="$resourcePath/js/json5.min.js"></script>
+  <script src="$resourcePath/js/reflow-json-jcr-convert.js"></script>
   <script src="$resourcePath/js/highlight.min.js"></script>
 
 #*  *##if ( $config.endContent )#*
