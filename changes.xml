@@ -24,7 +24,7 @@
   <body>
 
     <release version="1.3.0" date="not released">
-      <action type="update" dev="sseifert">
+      <action type="update" dev="sseifert" issue="3">
         Make compatible with Doxia 2.x and Velocity 2.x.
       </action>
     </release>
