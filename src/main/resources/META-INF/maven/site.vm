@@ -1414,7 +1414,7 @@
   </head>
 
 ##  // put page and project slugs as classes to the <body>. This allows page-specific CSS customizations.
-  <body class="page-$config.fileId project-$config.projectId" data-spy="scroll" data-offset="60" data-target="${esc.h}toc-scroll-target">
+  <body class="page-$config.fileId project-$config.projectId" data-spy="scroll" data-offset="60" data-target="${esc.h}toc-scroll-target" id="body">
 
     <div class="navbar navbar-fixed-top#if ( $config.is( "navbarInverse" ) ) navbar-inverse#end">
       <div class="navbar-inner">
@@ -1654,7 +1654,7 @@
   <div class="container subfooter">
     <div class="row">
       <div class="span12">
-        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p class="pull-right"><a href="#body">Back to top</a></p>
         <p class="copyright">Copyright &copy;#copyright (). All Rights Reserved.</p>
 #*  *##if ( $datePosition == "bottom" || $versionPosition == "bottom" )##
         <p class="version-date">#*
