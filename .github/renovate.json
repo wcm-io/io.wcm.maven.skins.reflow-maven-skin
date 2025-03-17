@@ -4,5 +4,9 @@
     "github>wcm-io/renovate-config:maven",
     "github>wcm-io/renovate-config:automerge-parent",
     "github>wcm-io/renovate-config:automerge-testing"
+  ],
+  "ignoreDeps": [
+    "org.apache.maven:*",
+    "org.codehaus.plexus:*"
   ]
 }
